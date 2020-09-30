@@ -25,42 +25,36 @@ var readingsJson = {
     13:
       "Who would then deny that when I am sipping tea in my tearoom I am swallowing the whole universe with it and that this very moment of my lifting the bowl to my lips is eternity itself transcending time and space? -D.T. Suzuki"
   };
-  
+
   function getReading() {
     var keys = Object.keys(readingsJson);
     return readingsJson[keys[Math.floor(keys.length * Math.random())]];
   }
-  
+
   console.log(getReading());
 
 
-let teaText = "Lorem ipsum blah blah blah...";
-
+// our tea reading js
 let slider= 1;
+
+// this sets the variable for the background image
+let bg;
+
 var textTyped = getReading();
-// var textTyped = "Hello " +  "Goodbye";
-// var textDiv =  createDiv("tea-text");
-// textDiv.html("<p>Hello</p> <p>Goodbue</p>");
-// var textTyped = textDiv;
+let res = textTyped.split(" ");
+
 var font;
 
-
-let img;
-function preload() {
-  img = loadImage('teacup.png');
-}
-
 function setup() {
-    var canvas = createCanvas(1000, 600);
-   
+    var canvas = createCanvas(windowWidth, windowHeight);
+
     //Where the canvas will be created
     canvas.parent('p5-tea-box');
-  
-    background(255, 255, 255);
-    
-    noLoop();
 
-    textFont("Helvetica");
+    background(255, 255, 255);
+    bg = loadImage("misc/teacup.png");
+
+    noLoop();
 
     opentype.load('FreeSans.otf', function(err, f) {
       if (err) {
@@ -70,22 +64,22 @@ function setup() {
         loop();
       }
     });
-  
+
 }
 
 function draw(){
     // text(teaText, 100,100);
   if (!font) return;
 
-  background(255);
+  background(bg);
   // TODO draw cup
-  background(220);
-  fill(255,255,255);
-  stroke(0,0,0)
-  image(img, 150, 50, 700, 700);
-  beginShape();
-  vertex()
-  
+  // background(220);
+  // fill(255,255,255);
+  // stroke(0,0,0)
+  // image(img, 150, 50, 700, 700);
+  // beginShape();
+  // vertex()
+
 //   // margin border
   translate(300, 420); // TODO: translate(x,y) to adjust position
   scale(0.25); // TODO: change scale multiplier to adjust size
@@ -101,26 +95,28 @@ function draw(){
 
     randomSeed(2)
     // dots
-    fill(0);
+
     noStroke();
-    var diameter = 7; // TODO: adjust diameter of dots
+     // TODO: adjust diameter of dots
     for (var i = 0; i < path.commands.length; i++) {
       var pnt = path.commands[i];
       // on every 2nd point
       addRandX = random(-100, 100);
       addRandY = random(-100, 100);
+      var diameter = random(7, 9);
+      fill(0, 255);
       circle(pnt.x+addRandX*slider, pnt.y+addRandY*slider, diameter);
       // TODO: Maybe draw different shape from circle
-      if (i === path.commands.length-1){
-          redraw();
-      }
-      
+      // if (i === path.commands.length-1){
+      //     redraw();
+      // }
+
     }
 
   }
-  
+
   if (slider >= 0){
     slider= slider-0.01
   }
- 
+
 }

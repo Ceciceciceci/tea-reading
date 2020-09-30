@@ -16,7 +16,7 @@ var music = new Audio();
 function playMusic(file) {
     music.pause();
     music = new Audio(file);
-    music.volume = 0.7;
+    music.volume = 0.1;
     music.play();
 }
 
@@ -25,7 +25,7 @@ let teaModal = document.querySelector(".tea-container-modal");
 let pins = document.querySelectorAll(".pin");
 pins.forEach(pin => {
     pin.addEventListener("click", function(){
-        playMusic("magic-chime.mp3");
+        playMusic("misc/magic-chime.mp3");
         teaModal.style.display = "block";
         setTimeout(function(){
             teaModal.style.opacity = 1;
@@ -41,3 +41,4 @@ close.addEventListener("click", function(){
         teaModal.style.display = "none";
     }, 200);
 })
+
